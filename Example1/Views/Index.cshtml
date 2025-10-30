@@ -1,0 +1,29 @@
+@model PostListViewModel
+@{
+    ViewData["Title"] = "Blog Home";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to the Blog</h1>
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New Post</a>
+    </p>
+</div>
+
+<hr />
+
+@if (Model.Posts.Any())
+{
+    <ul class="list-group">
+        @foreach (var post in Model.Posts)
+        {
+            <li class="list-group-item">
+                <a asp-action="Details" asp-route-id="@post.Id">@post.Title</a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No posts yet. Why don't you create one?</p>
+}
