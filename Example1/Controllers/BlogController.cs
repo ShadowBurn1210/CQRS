@@ -55,9 +55,10 @@ namespace CQRSExample
                 return View(model);
 
             var command = new CreatePostCommand(model.Title, model.Content);
-            var newID = await _mediator.Send(command);
+            await _mediator.Send(command);
 
-            return RedirectToAction(nameof(Details), new { id = newID });
+            // Redirect to Index instead of Details to avoid reading DB after command
+            return RedirectToAction(nameof(Index));
         }
     }
 }
